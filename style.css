@@ -1,41 +1,55 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const editor = document.getElementById("editor");
-
-    // General toolbar commands
-    document.querySelectorAll(".toolbar [data-command]").forEach(btn => {
-        btn.addEventListener("click", e => {
-            let cmd = btn.dataset.command;
-            let val = btn.value || null;
-            document.execCommand(cmd, false, val);
-        });
-
-        if (btn.tagName === "SELECT" || btn.type === "color") {
-            btn.addEventListener("change", e => {
-                let cmd = btn.dataset.command;
-                let val = btn.value;
-                document.execCommand(cmd, false, val);
-            });
-        }
-    });
-
-    // Insert link
-    document.getElementById("linkBtn").addEventListener("click", () => {
-        const url = prompt("Enter the link URL:");
-        if (url) document.execCommand("createLink", false, url);
-    });
-
-    // Insert image
-    document.getElementById("imgBtn").addEventListener("click", () => {
-        const url = prompt("Enter the image URL:");
-        if (url) document.execCommand("insertImage", false, url);
-    });
-
-    // Save & self-destruct
-    document.getElementById("saveBtn").addEventListener("click", () => {
-        if (editor.innerHTML.trim() === "") return;
-        setTimeout(() => {
-            editor.innerHTML = "";
-        }, 5000);
-    });
-});
-
+body {
+    background-color: #121212;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+header {
+    text-align: center;
+    padding: 10px;
+    background-color: #1f1f1f;
+    font-size: 22px;
+    font-weight: bold;
+}
+.toolbar {
+    background: #1f1f1f;
+    padding: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    border-bottom: 1px solid #333;
+}
+.toolbar button, .toolbar select, .toolbar input {
+    background: #333;
+    color: white;
+    border: none;
+    padding: 5px 8px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.toolbar button:hover, .toolbar select:hover, .toolbar input:hover {
+    background: #555;
+}
+#editor {
+    min-height: 400px;
+    padding: 15px;
+    background: #1a1a1a;
+    color: white;
+    outline: none;
+    font-size: 16px;
+}
+.save-btn {
+    background: #00ff99;
+    color: #000;
+    padding: 8px 15px;
+    margin: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+.save-btn:hover {
+    background: #00cc77;
+}
