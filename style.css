@@ -1,0 +1,17 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: #f8f8f8;
+}
+
+#timer {
+  font-size: 20px;
+  margin: 10px;
+}
+
+#editor-container {
+  height: 300px;
+  width: 80%;
+  margin: auto;
+  background: white;
+}
