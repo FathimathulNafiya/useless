@@ -1,46 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>Message Saver</title>
-<link rel="stylesheet" href="style.css">
+  <title>Secret Note</title>
+  <script src="https://cdn.jsdelivr.net/npm/tinymce@6.8.3/tinymce.min.js" referrerpolicy="origin"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      color: #00ff99;
+      text-shadow: 0 0 5px #00ff99;
+    }
+    button {
+      padding: 12px 20px;
+      margin: 10px;
+      font-size: 16px;
+      background-color: #00ff99;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #00cc77;
+    }
+    textarea {
+      width: 100%;
+      max-width: 1000px;
+    }
+  </style>
 </head>
 <body>
 
-<header>Message Saver</header>
+  <h1>Message Saver</h1>
+  
+  <textarea id="secretNote">Type your secret here...</textarea>
+  <br>
+  <button onclick="saveAndDestroy()">Save</button>
 
-<div class="toolbar">
-    <button data-command="bold"><b>B</b></button>
-    <button data-command="italic"><i>I</i></button>
-    <button data-command="underline"><u>U</u></button>
-    <button data-command="strikeThrough"><s>S</s></button>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      tinymce.init({
+        selector: '#secretNote',
+        height: 500,
+        width: "100%",
+        skin: "oxide-dark",
+        content_css: "dark",
+        menubar: true,
+        plugins: 'lists link image table code help wordcount',
+        toolbar: 'bold italic underline | fontfamily fontsize | forecolor backcolor | ' +
+                 'alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | ' +
+                 'removeformat | help',
+        toolbar_mode: 'wrap',
+        setup: function (editor) {
+          editor.on('init', function () {
+            editor.setContent('');
+          });
+        }
+      });
+    });
 
-    <select data-command="fontSize">
-        <option value="">Font Size</option>
-        <option value="1">Small</option>
-        <option value="3">Normal</option>
-        <option value="5">Large</option>
-        <option value="7">Huge</option>
-    </select>
+    function saveAndDestroy() {
+      let content = tinymce.get('secretNote').getContent();
+      
+      if (content.trim() === "") {
+        alert("Note is empty!");
+        return;
+      }
 
-    <input type="color" data-command="foreColor" title="Text Color">
-    <input type="color" data-command="hiliteColor" title="Highlight Color">
+      
 
-    <button data-command="insertUnorderedList">• List</button>
-    <button data-command="insertOrderedList">1. List</button>
+      setTimeout(() => {
+        tinymce.get('secretNote').setContent('');
+        
+      }, 5000);
+    }
+  </script>
 
-    <button data-command="justifyLeft">⯇</button>
-    <button data-command="justifyCenter">≡</button>
-    <button data-command="justifyRight">⯈</button>
-
-    <button id="linkBtn">🔗</button>
-    <button id="imgBtn">🖼</button>
-</div>
-
-<div id="editor" contenteditable="true"></div>
-
-<button class="save-btn" id="saveBtn">Save</button>
-
-<script src="script.js"></script>
 </body>
 </html>
