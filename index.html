@@ -10,12 +10,12 @@
 <header>Message Saver</header>
 
 <div class="toolbar">
-    <button onclick="format('bold')"><b>B</b></button>
-    <button onclick="format('italic')"><i>I</i></button>
-    <button onclick="format('underline')"><u>U</u></button>
-    <button onclick="format('strikeThrough')"><s>S</s></button>
+    <button data-command="bold"><b>B</b></button>
+    <button data-command="italic"><i>I</i></button>
+    <button data-command="underline"><u>U</u></button>
+    <button data-command="strikeThrough"><s>S</s></button>
 
-    <select onchange="format('fontSize', this.value)">
+    <select data-command="fontSize">
         <option value="">Font Size</option>
         <option value="1">Small</option>
         <option value="3">Normal</option>
@@ -23,23 +23,23 @@
         <option value="7">Huge</option>
     </select>
 
-    <input type="color" onchange="format('foreColor', this.value)" title="Text Color">
-    <input type="color" onchange="format('hiliteColor', this.value)" title="Highlight Color">
+    <input type="color" data-command="foreColor" title="Text Color">
+    <input type="color" data-command="hiliteColor" title="Highlight Color">
 
-    <button onclick="format('insertUnorderedList')">• List</button>
-    <button onclick="format('insertOrderedList')">1. List</button>
+    <button data-command="insertUnorderedList">• List</button>
+    <button data-command="insertOrderedList">1. List</button>
 
-    <button onclick="format('justifyLeft')">⯇</button>
-    <button onclick="format('justifyCenter')">≡</button>
-    <button onclick="format('justifyRight')">⯈</button>
+    <button data-command="justifyLeft">⯇</button>
+    <button data-command="justifyCenter">≡</button>
+    <button data-command="justifyRight">⯈</button>
 
-    <button onclick="insertLink()">🔗</button>
-    <button onclick="insertImage()">🖼</button>
+    <button id="linkBtn">🔗</button>
+    <button id="imgBtn">🖼</button>
 </div>
 
 <div id="editor" contenteditable="true"></div>
 
-<button class="save-btn" onclick="saveAndDestroy()">Save</button>
+<button class="save-btn" id="saveBtn">Save</button>
 
 <script src="script.js"></script>
 </body>
